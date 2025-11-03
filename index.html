@@ -57,24 +57,6 @@
         font-size: 14px;
       }
 
-      .input-group {
-        margin-bottom: 20px;
-      }
-
-      input[type="password"] {
-        width: 100%;
-        padding: 15px;
-        border: 2px solid #e0e0e0;
-        border-radius: 10px;
-        font-size: 16px;
-        transition: border-color 0.3s;
-      }
-
-      input[type="password"]:focus {
-        outline: none;
-        border-color: #2a5298;
-      }
-
       .btn {
         width: 100%;
         padding: 15px;
@@ -104,17 +86,6 @@
 
       .btn-download:hover {
         box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
-      }
-
-      .error {
-        color: #e74c3c;
-        margin-top: 10px;
-        font-size: 14px;
-        display: none;
-      }
-
-      .hidden {
-        display: none;
       }
 
       .instructions {
@@ -173,44 +144,15 @@
   </head>
   <body>
     <div class="container">
-      <div class="logo">🔒</div>
+      <div class="logo">📱</div>
       <h1>Navy Encrypt</h1>
       <p class="version">รับส่งไฟล์ เวอร์ชัน 3.3.8 (9)</p>
 
-      <!-- Password Form -->
-      <div id="password-form">
-        <div class="input-group">
-          <input
-            type="password"
-            id="password"
-            placeholder="กรุณาใส่รหัสผ่าน / Enter Password"
-            autocomplete="off"
-          />
-        </div>
-        <button class="btn" onclick="checkPassword()">ยืนยัน / Verify</button>
-        <p class="error" id="error-message">
-          รหัสผ่านไม่ถูกต้อง / Incorrect Password
-        </p>
-      </div>
-
-      <!-- Download Section (hidden initially) -->
-      <div id="download-section" class="hidden">
-        <p style="color: #27ae60; margin-bottom: 20px; font-size: 18px">
-          ✓ รหัสผ่านถูกต้อง
-        </p>
+      <!-- Download Section -->
+      <div id="download-section">
         <button class="btn btn-download" onclick="installApp()">
           📱 ติดตั้ง Navy Encrypt
         </button>
-
-        <p style="color: #666; margin: 15px 0; font-size: 14px">
-          หากใช้คอมพิวเตอร์
-          <a
-            href="downloads/navy_encrypt.ipa"
-            download="navy_encrypt.ipa"
-            style="color: #2a5298"
-            >ดาวน์โหลด IPA</a
-          >
-        </p>
 
         <div class="instructions">
           <h3>📱 วิธีติดตั้งแอปพลิเคชัน</h3>
@@ -236,46 +178,6 @@
     </div>
 
     <script>
-      const correctPassword = "#navy338-9@$-SS";
-
-      // Check if user already authenticated (session)
-      if (sessionStorage.getItem("authenticated") === "true") {
-        showDownloadSection();
-      }
-
-      // Allow Enter key to submit
-      document
-        .getElementById("password")
-        .addEventListener("keypress", function (e) {
-          if (e.key === "Enter") {
-            checkPassword();
-          }
-        });
-
-      function checkPassword() {
-        const password = document.getElementById("password").value;
-        const errorMessage = document.getElementById("error-message");
-
-        if (password === correctPassword) {
-          sessionStorage.setItem("authenticated", "true");
-          showDownloadSection();
-        } else {
-          errorMessage.style.display = "block";
-          document.getElementById("password").value = "";
-          document.getElementById("password").style.borderColor = "#e74c3c";
-
-          setTimeout(() => {
-            errorMessage.style.display = "none";
-            document.getElementById("password").style.borderColor = "#e0e0e0";
-          }, 3000);
-        }
-      }
-
-      function showDownloadSection() {
-        document.getElementById("password-form").classList.add("hidden");
-        document.getElementById("download-section").classList.remove("hidden");
-      }
-
       function installApp() {
         // OTA installation link using itms-services protocol
         const manifestUrl =

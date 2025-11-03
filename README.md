@@ -10,18 +10,11 @@ This repository hosts a password-protected download page for the Navy Encrypt iO
 
 ## Features
 
-- 🔒 Password-protected download (no user login required)
 - 📱 OTA (Over-The-Air) Installation - Install directly from iPhone/iPad
 - 🎯 No computer required - Users can install from their device
 - 📝 Step-by-step installation instructions
 - 🌐 Hosted on GitHub Pages (free)
 - 💻 Fallback download for desktop users
-
-## Download Password
-
-**Password:**
-
-Users must enter this password to access the download page.
 
 ## File Structure
 
