@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Navy Encrypt - รับส่งไฟล์</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .container {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        max-width: 500px;
+        width: 100%;
+        padding: 40px;
+        text-align: center;
+      }
+
+      .logo {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        border-radius: 20px;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 40px;
+        color: white;
+      }
+
+      h1 {
+        color: #1e3c72;
+        margin-bottom: 10px;
+        font-size: 28px;
+      }
+
+      .version {
+        color: #666;
+        margin-bottom: 30px;
+        font-size: 14px;
+      }
+
+      .input-group {
+        margin-bottom: 20px;
+      }
+
+      input[type="password"] {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+      }
+
+      input[type="password"]:focus {
+        outline: none;
+        border-color: #2a5298;
+      }
+
+      .btn {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+        margin-bottom: 10px;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(30, 60, 114, 0.3);
+      }
+
+      .btn:active {
+        transform: translateY(0);
+      }
+
+      .btn-download {
+        background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+      }
+
+      .btn-download:hover {
+        box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
+      }
+
+      .error {
+        color: #e74c3c;
+        margin-top: 10px;
+        font-size: 14px;
+        display: none;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .instructions {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 30px;
+        text-align: left;
+      }
+
+      .instructions h3 {
+        color: #1e3c72;
+        margin-bottom: 15px;
+        font-size: 18px;
+      }
+
+      .instructions ol {
+        padding-left: 20px;
+      }
+
+      .instructions li {
+        margin-bottom: 10px;
+        color: #555;
+        line-height: 1.6;
+      }
+
+      .warning {
+        background: #fff3cd;
+        border-left: 4px solid #ffc107;
+        padding: 15px;
+        margin-top: 20px;
+        border-radius: 5px;
+        text-align: left;
+      }
+
+      .warning strong {
+        color: #856404;
+      }
+
+      .warning p {
+        color: #856404;
+        margin-top: 5px;
+        font-size: 14px;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          padding: 30px 20px;
+        }
+
+        h1 {
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">🔒</div>
+      <h1>Navy Encrypt</h1>
+      <p class="version">รับส่งไฟล์ เวอร์ชัน 3.3.8 (9)</p>
+
+      <!-- Password Form -->
+      <div id="password-form">
+        <div class="input-group">
+          <input
+            type="password"
+            id="password"
+            placeholder="กรุณาใส่รหัสผ่าน / Enter Password"
+            autocomplete="off"
+          />
+        </div>
+        <button class="btn" onclick="checkPassword()">ยืนยัน / Verify</button>
+        <p class="error" id="error-message">
+          รหัสผ่านไม่ถูกต้อง / Incorrect Password
+        </p>
+      </div>
+
+      <!-- Download Section (hidden initially) -->
+      <div id="download-section" class="hidden">
+        <p style="color: #27ae60; margin-bottom: 20px; font-size: 18px">
+          ✓ รหัสผ่านถูกต้อง
+        </p>
+        <button class="btn btn-download" onclick="installApp()">
+          📱 ติดตั้ง Navy Encrypt
+        </button>
+
+        <p style="color: #666; margin: 15px 0; font-size: 14px">
+          หากใช้คอมพิวเตอร์
+          <a
+            href="downloads/navy_encrypt.ipa"
+            download="navy_encrypt.ipa"
+            style="color: #2a5298"
+            >ดาวน์โหลด IPA</a
+          >
+        </p>
+
+        <div class="instructions">
+          <h3>📱 วิธีติดตั้งแอปพลิเคชัน</h3>
+          <ol>
+            <li><strong>กดปุ่ม "ติดตั้ง Navy Encrypt"</strong> ด้านบน</li>
+            <li>
+              iOS จะแสดงหน้าต่างยืนยัน → กดปุ่ม <strong>"ติดตั้ง"</strong>
+            </li>
+            <li>รอจนแอปพลิเคชันติดตั้งเสร็จ</li>
+            <li>
+              ไปที่ <strong>Settings → General → Device Management</strong>
+            </li>
+            <li>เลือก Enterprise App และกดปุ่ม <strong>"Trust"</strong></li>
+            <li>เปิดแอปพลิเคชัน Navy Encrypt บนหน้าจอหลัก</li>
+          </ol>
+        </div>
+
+        <div class="warning">
+          <strong>⚠️ หมายเหตุสำคัญ</strong>
+          <p>แอปพลิเคชันนี้เป็น Enterprise Distribution</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const correctPassword = "#navy338-9@$-SS";
+
+      // Check if user already authenticated (session)
+      if (sessionStorage.getItem("authenticated") === "true") {
+        showDownloadSection();
+      }
+
+      // Allow Enter key to submit
+      document
+        .getElementById("password")
+        .addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            checkPassword();
+          }
+        });
+
+      function checkPassword() {
+        const password = document.getElementById("password").value;
+        const errorMessage = document.getElementById("error-message");
+
+        if (password === correctPassword) {
+          sessionStorage.setItem("authenticated", "true");
+          showDownloadSection();
+        } else {
+          errorMessage.style.display = "block";
+          document.getElementById("password").value = "";
+          document.getElementById("password").style.borderColor = "#e74c3c";
+
+          setTimeout(() => {
+            errorMessage.style.display = "none";
+            document.getElementById("password").style.borderColor = "#e0e0e0";
+          }, 3000);
+        }
+      }
+
+      function showDownloadSection() {
+        document.getElementById("password-form").classList.add("hidden");
+        document.getElementById("download-section").classList.remove("hidden");
+      }
+
+      function installApp() {
+        // OTA installation link using itms-services protocol
+        const manifestUrl =
+          "https://YOUR_GITHUB_USERNAME.github.io/navy-distributor/downloads/manifest.plist";
+        const installUrl = `itms-services://?action=download-manifest&url=${encodeURIComponent(
+          manifestUrl
+        )}`;
+
+        // Redirect to install URL
+        window.location.href = installUrl;
+      }
+    </script>
+  </body>
+</html>
