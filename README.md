@@ -6,7 +6,6 @@ Enterprise distribution portal for Navy Encrypt iOS application (รับส่
 
 This repository hosts a password-protected download page for the Navy Encrypt iOS enterprise application. Users can download the IPA file after entering the correct password.
 
-**App Version:** 3.3.8 (9)
 **Organization:** NAVAL COMMUNICATIONS AND INFORMATION TECHNOLOGY DEPARTMENT
 
 ## Features
