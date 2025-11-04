@@ -34,13 +34,12 @@ navy-distributor/
 
 1. **Open Safari** on your iPhone or iPad
 2. Visit the distribution page: `https://YOUR_USERNAME.github.io/navy-distributor/`
-3. Enter password:
-4. Tap the **"ติดตั้ง Navy Encrypt"** (Install Navy Encrypt) button
-5. iOS will show a confirmation dialog → Tap **"Install"**
-6. Wait for the app to download and install (you'll see the icon on your home screen)
-7. Go to **Settings → General → Device Management**
-8. Select the Navy enterprise profile and tap **"Trust"**
-9. Return to home screen and open Navy Encrypt
+3. Tap the **"ติดตั้ง Navy Encrypt"** (Install Navy Encrypt) button
+4. iOS will show a confirmation dialog → Tap **"Install"**
+5. Wait for the app to download and install (you'll see the icon on your home screen)
+6. Go to **Settings → General → Device Management**
+7. Select the Navy enterprise profile and tap **"Trust"**
+8. Return to home screen and open Navy Encrypt
 
 ### "Unable to Install" Error
 

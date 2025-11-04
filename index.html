@@ -3,6 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1e3c72" />
+    <meta
+      name="description"
+      content="Navy Encrypt - แอปพลิเคชันรับส่งไฟล์สำหรับบุคลากรทหารเรือ"
+    />
     <title>Navy Encrypt - รับส่งไฟล์</title>
     <style>
       * {
@@ -11,169 +16,486 @@
         box-sizing: border-box;
       }
 
+      :root {
+        --navy-dark: #1e3c72;
+        --navy-light: #2a5298;
+        --navy-gradient: linear-gradient(
+          135deg,
+          #1e3c72 0%,
+          #2a5298 50%,
+          #3b5998 100%
+        );
+        --green-gradient: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+        --text-dark: #2c3e50;
+        --text-light: #7f8c8d;
+        --border-radius: 16px;
+        --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.07);
+        --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.15);
+        --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      @keyframes gradient-shift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
       body {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          Oxygen, Ubuntu, Cantarell, sans-serif;
-        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+          "Helvetica Neue", Arial, sans-serif;
+        background: linear-gradient(135deg, #1e3c72, #2a5298, #3b5998, #1e3c72);
+        background-size: 400% 400%;
+        animation: gradient-shift 15s ease infinite;
         min-height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
         padding: 20px;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.1) 1px,
+          transparent 1px
+        );
+        background-size: 50px 50px;
+        animation: float 20s ease-in-out infinite;
+        pointer-events: none;
       }
 
       .container {
-        background: white;
-        border-radius: 20px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        max-width: 500px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 24px;
+        box-shadow: var(--shadow-lg);
+        max-width: 550px;
         width: 100%;
-        padding: 40px;
+        padding: 48px 40px;
         text-align: center;
+        position: relative;
+        animation: fade-in 0.6s ease-out;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .logo-container {
+        margin-bottom: 40px;
+        animation: fade-in 0.8s ease-out 0.2s both;
       }
 
       .logo {
-        width: 80px;
-        height: 80px;
-        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-        border-radius: 20px;
-        margin: 0 auto 20px;
+        width: 36px;
+        height: 36px;
+        background: var(--navy-gradient);
+        border-radius: 12px;
+        margin: 0 auto;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 40px;
-        color: white;
+        font-size: 36px;
+        box-shadow: var(--shadow-md);
+        transition: transform 0.3s ease;
+      }
+
+      .logo:hover {
+        transform: scale(1.05) rotate(5deg);
       }
 
       h1 {
-        color: #1e3c72;
-        margin-bottom: 10px;
-        font-size: 28px;
+        color: var(--text-dark);
+        margin: 20px 0 8px;
+        font-size: 32px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        animation: fade-in 0.8s ease-out 0.3s both;
       }
 
-      .version {
-        color: #666;
-        margin-bottom: 30px;
-        font-size: 14px;
+      .version-badge {
+        display: inline-block;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 32px;
+        box-shadow: var(--shadow-sm);
+        animation: fade-in 0.8s ease-out 0.4s both;
+      }
+
+      .download-section {
+        animation: fade-in 0.8s ease-out 0.5s both;
       }
 
       .btn {
         width: 100%;
-        padding: 15px;
-        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-        color: white;
+        padding: 18px 24px;
         border: none;
-        border-radius: 10px;
-        font-size: 16px;
+        border-radius: var(--border-radius);
+        font-size: 17px;
         font-weight: 600;
         cursor: pointer;
-        transition: transform 0.2s, box-shadow 0.2s;
-        margin-bottom: 10px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
       }
 
-      .btn:hover {
+      .btn::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+      }
+
+      .btn:active::before {
+        width: 300px;
+        height: 300px;
+      }
+
+      .btn-primary {
+        background: var(--green-gradient);
+        color: white;
+        margin-bottom: 16px;
+      }
+
+      .btn-primary:hover {
         transform: translateY(-2px);
-        box-shadow: 0 10px 20px rgba(30, 60, 114, 0.3);
+        box-shadow: 0 12px 28px rgba(46, 204, 113, 0.35);
       }
 
-      .btn:active {
+      .btn-primary:active {
         transform: translateY(0);
       }
 
-      .btn-download {
-        background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+      .btn-secondary {
+        background: white;
+        color: var(--navy-dark);
+        border: 2px solid var(--navy-light);
+        font-size: 15px;
+        padding: 12px 20px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 12px;
       }
 
-      .btn-download:hover {
-        box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
+      .btn-secondary:hover {
+        background: rgba(30, 60, 114, 0.05);
+        transform: translateY(-1px);
       }
 
-      .instructions {
-        background: #f8f9fa;
-        border-radius: 10px;
-        padding: 20px;
-        margin-top: 30px;
+      .divider {
+        display: flex;
+        align-items: center;
+        margin: 28px 0;
+        color: var(--text-light);
+        font-size: 13px;
+      }
+
+      .divider::before,
+      .divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(to right, transparent, #ddd, transparent);
+      }
+
+      .divider span {
+        padding: 0 16px;
+      }
+
+      .instructions-card {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-radius: var(--border-radius);
+        padding: 24px;
+        margin-top: 32px;
         text-align: left;
+        border: 1px solid #e0e0e0;
+        animation: fade-in 0.8s ease-out 0.6s both;
       }
 
-      .instructions h3 {
-        color: #1e3c72;
-        margin-bottom: 15px;
+      .instructions-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        user-select: none;
+        margin-bottom: 20px;
+      }
+
+      .instructions-header h3 {
+        color: var(--text-dark);
         font-size: 18px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 10px;
       }
 
-      .instructions ol {
-        padding-left: 20px;
+      .toggle-icon {
+        font-size: 20px;
+        transition: transform 0.3s ease;
       }
 
-      .instructions li {
-        margin-bottom: 10px;
-        color: #555;
-        line-height: 1.6;
+      .toggle-icon.open {
+        transform: rotate(180deg);
       }
 
-      .warning {
-        background: #fff3cd;
-        border-left: 4px solid #ffc107;
-        padding: 15px;
-        margin-top: 20px;
-        border-radius: 5px;
-        text-align: left;
+      .instructions-content {
+        max-height: 500px;
+        overflow: hidden;
+        transition: max-height 0.4s ease, opacity 0.3s ease;
       }
 
-      .warning strong {
-        color: #856404;
+      .instructions-content.collapsed {
+        max-height: 0;
+        opacity: 0;
       }
 
-      .warning p {
-        color: #856404;
-        margin-top: 5px;
+      .step {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 20px;
+        align-items: start;
+      }
+
+      .step:last-child {
+        margin-bottom: 0;
+      }
+
+      .step-number {
+        min-width: 32px;
+        height: 32px;
+        background: var(--navy-gradient);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
         font-size: 14px;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .step-content {
+        flex: 1;
+        padding-top: 4px;
+      }
+
+      .step-content p {
+        color: var(--text-dark);
+        line-height: 1.6;
+        font-size: 15px;
+      }
+
+      .step-content strong {
+        color: var(--navy-dark);
+      }
+
+      .notice {
+        background: linear-gradient(135deg, #fff3cd 0%, #ffe5a1 100%);
+        border-left: 4px solid #ffc107;
+        padding: 16px 20px;
+        margin-top: 24px;
+        border-radius: 8px;
+        text-align: left;
+        animation: fade-in 0.8s ease-out 0.7s both;
+      }
+
+      .notice-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 700;
+        color: #856404;
+        margin-bottom: 8px;
+        font-size: 15px;
+      }
+
+      .notice p {
+        color: #856404;
+        font-size: 14px;
+        line-height: 1.5;
+        margin: 0;
+      }
+
+      .footer {
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 1px solid #e0e0e0;
+        animation: fade-in 0.8s ease-out 0.8s both;
+      }
+
+      .footer-text {
+        color: var(--text-light);
+        font-size: 13px;
+        line-height: 1.6;
       }
 
       @media (max-width: 600px) {
         .container {
-          padding: 30px 20px;
+          padding: 36px 24px;
+          border-radius: 20px;
         }
 
         h1 {
-          font-size: 24px;
+          font-size: 28px;
+        }
+
+        .logo {
+          width: 32px;
+          height: 32px;
+          font-size: 28px;
+        }
+
+        .btn {
+          padding: 16px 20px;
+          font-size: 16px;
+        }
+
+        .step {
+          gap: 12px;
+        }
+
+        .step-content p {
+          font-size: 14px;
         }
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <div class="logo">📱</div>
+      <div class="logo">
+        <img src="app_icon.png" alt="Navy Encrypt Logo" />
+      </div>
+
       <h1>Navy Encrypt</h1>
-      <p class="version">รับส่งไฟล์ เวอร์ชัน 3.3.8 (9)</p>
+      <div class="version-badge">เวอร์ชัน 3.3.8 (9)</div>
 
-      <!-- Download Section -->
-      <div id="download-section">
-        <button class="btn btn-download" onclick="installApp()">
-          📱 ติดตั้ง Navy Encrypt
+      <div class="download-section">
+        <button class="btn btn-primary" onclick="installApp()">
+          <span style="font-size: 20px; margin-right: 8px">📥</span>
+          ติดตั้ง Navy Encrypt
         </button>
+      </div>
 
-        <div class="instructions">
-          <h3>📱 วิธีติดตั้งแอปพลิเคชัน</h3>
-          <ol>
-            <li><strong>กดปุ่ม "ติดตั้ง Navy Encrypt"</strong> ด้านบน</li>
-            <li>
-              iOS จะแสดงหน้าต่างยืนยัน → กดปุ่ม <strong>"ติดตั้ง"</strong>
-            </li>
-            <li>รอจนแอปพลิเคชันติดตั้งเสร็จ</li>
-            <li>
-              ไปที่ <strong>Settings → General → Device Management</strong>
-            </li>
-            <li>เลือก Enterprise App และกดปุ่ม <strong>"Trust"</strong></li>
-            <li>เปิดแอปพลิเคชัน Navy Encrypt บนหน้าจอหลัก</li>
-          </ol>
+      <div class="instructions-card">
+        <div class="instructions-header" onclick="toggleInstructions()">
+          <h3>
+            <span>📋</span>
+            <span>วิธีติดตั้งแอปพลิเคชัน</span>
+          </h3>
+          <span class="toggle-icon" id="toggle-icon">▼</span>
         </div>
 
-        <div class="warning">
-          <strong>⚠️ หมายเหตุสำคัญ</strong>
-          <p>แอปพลิเคชันนี้เป็น Enterprise Distribution</p>
+        <div class="instructions-content" id="instructions-content">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <p>กดปุ่ม <strong>"ติดตั้ง Navy Encrypt"</strong> ด้านบน</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <p>
+                iOS จะแสดงหน้าต่างยืนยัน → กดปุ่ม <strong>"ติดตั้ง"</strong>
+              </p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <p>รอจนแอปพลิเคชันติดตั้งเสร็จ</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <p>
+                เปิด <strong>Settings → General → Device Management</strong>
+              </p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">5</div>
+            <div class="step-content">
+              <p>เลือก Enterprise App และกดปุ่ม <strong>"Trust"</strong></p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">6</div>
+            <div class="step-content">
+              <p>เปิดแอปพลิเคชัน Navy Encrypt บนหน้าจอหลัก</p>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <div class="notice">
+        <div class="notice-title">
+          <span>⚠️</span>
+          <span>หมายเหตุสำคัญ</span>
+        </div>
+        <p>
+          แอปพลิเคชันนี้เป็น Enterprise Distribution
+          สำหรับบุคลากรทหารเรือที่ได้รับอนุญาตเท่านั้น
+        </p>
+      </div>
+
+      <div class="footer">
+        <p class="footer-text">
+          NAVAL COMMUNICATIONS AND INFORMATION TECHNOLOGY DEPARTMENT<br />
+          กรมสื่อสารและเทคโนโลยีสารสนเทศทหารเรือ
+        </p>
       </div>
     </div>
 
@@ -190,6 +512,19 @@
         // Redirect to install URL
         window.location.href = installUrl;
       }
+
+      function toggleInstructions() {
+        const content = document.getElementById("instructions-content");
+        const icon = document.getElementById("toggle-icon");
+
+        content.classList.toggle("collapsed");
+        icon.classList.toggle("open");
+      }
+
+      // Initialize instructions as expanded
+      document.addEventListener("DOMContentLoaded", function () {
+        // Instructions start expanded, no action needed
+      });
     </script>
   </body>
 </html>
